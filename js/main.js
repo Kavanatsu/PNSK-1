@@ -50,7 +50,7 @@ let app = new Vue({
             return this.variants[this.selectedVariant].variantQuantity;
         },
         sale() {
-            return this.brand + ' ' + this.product + this.variants[this.selectedVariant].onSale;
+						if (this.variants[this.selectedVariant].onSale) return "On sale";
         }
     }      
  })

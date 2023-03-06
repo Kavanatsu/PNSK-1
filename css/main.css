@@ -33,10 +33,20 @@ img {
     width: 50%;
 }
 
+.title {
+	display: flex;
+	flex-direction: row;
+}
+
+.title > span {
+	font-weight: bold;
+	color: #f1b40d;
+	text-shadow: 1px 1px #282828;
+}
+
 .color {
     display: flex;
     flex-direction: row;
-
 }
 
 .color > div {
