@@ -33,6 +33,31 @@ img {
     width: 50%;
 }
 
+.color {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.color > div {
+    padding: 0 20px; 
+    margin: 0 10px;
+    background-color: #bdc4bb;   
+    border-radius: 20px;
+}
+
+.size {
+    display: flex;
+    flex-direction: row;
+}
+
+.size > div {
+    padding: 0 20px;
+    margin: 10px 10px;
+    background-color: #bdc4bb;   
+    border-radius: 20px;
+}
+
 .color-box {
     width: 40px;
     height: 40px;
