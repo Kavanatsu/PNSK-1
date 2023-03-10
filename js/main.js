@@ -1,35 +1,64 @@
+Vue.component('product-details', {
+	props: {
+		details: {
+			type: Array,
+			required: true
+		} 
+	},
+	template: `
+		<ul>
+			<li v-for="detail in details">{{ detail }}</li>
+		</ul>
+	`
+})
+
 Vue.component('product', {
+	props: {
+		premium: {
+			type: Boolean,
+			required: true
+		}
+	},
 	template: `
 		<div class="product">
+
 			<div class="product-image">
 				<img :src="image" :alt="altText"/>
 			</div>
+
 			<div class="product-info">
+
 				<div class="title">
 					<h1>{{ title }} </h1><span>{{ sale }}</span>
 				</div>
+
 				<p v-if="inStock">In stock</p>
 				<p v-else :class="{ disabledText: !inStock }">Out of Stock</p>
 				<a :href="link">More products like this</a>
-				<ul>
-					<li v-for="detail in details">{{ detail }}</li>
-				</ul>
+				<p>Shipping: {{ shipping }}</p>
+
+				<product-details :details="details"></product-details>
+
 				<div class="color">
 					<div class="color-box" v-for="(variant, index) in variants" :key="variant.variantId" :style="{ backgroundColor:variant.variantColor }" @mouseover="updateProduct(index)">
 					</div>
 				</div>
+
 				<div class="size">
 					<div v-for="size in sizes">
 						<p>{{ size }}</p>
 					</div>
 				</div>
+
 				<div class="cart">
 					<p>Cart({{ cart }})</p>
 				</div> 
+
 				<div class="buttons">
 					<button v-on:click="addToCart" :disabled="!inStock" :class="{ disabledButton: !inStock }">Add to cart</button>
 					<button v-on:click="removeFromCart" v-if="cart > 0">Remove from cart</button>
 				</div>
+
 			</div>
 		</div>
 	`,
@@ -86,9 +115,20 @@ Vue.component('product', {
 		},
 		sale() {
 				if (this.variants[this.selectedVariant].onSale) return "On sale";
+		},
+		shipping() {
+			if (this.premium) {
+					return "Free";
+			} else {
+					return 2.99
+			}
 		}
 	}
 })
+
 let app = new Vue({
-  el: '#app'
+  el: '#app',
+	data: {
+		premium: true,
+	},
 })
