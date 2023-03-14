@@ -157,10 +157,19 @@ textarea {
     cursor: pointer;
 }
 
+.product-tabs > ul > span:not(.activeTab) {
+    cursor: default;
+}
+
+.info > ul > span:not(.activeTab) {
+    cursor: default;
+}
+
 .activeTab {
     color: #16C0B0;
     text-decoration: underline;
-		padding: 0 40px;
+	padding: 0 40px;
+    cursor: pointer;
 }
 
 .product-tabs {

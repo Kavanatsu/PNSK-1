@@ -10,7 +10,7 @@ Vue.component('product-tabs', {
 	template: `
 	<div class="product-tabs">   
      <ul>
-       <span :class="{ activeTab: selectedTab === tab }" v-for="(tab, index) in tabs" @click="selectedTab = tab">{{ tab }}</span>
+       <span :class="{ activeTab: selectedTab !== tab }" v-for="(tab, index) in tabs" @click="selectedTab = tab">{{ tab }}</span>
      </ul>
   
 		<div v-show="selectedTab === 'Reviews'">
@@ -56,9 +56,9 @@ Vue.component('info', {
 		}
 	},
 	template: `
-		<div>
+		<div class="info">
 			<ul>
-			<span :class="{ activeTab: selectedTab === tab }" v-for="(tab, index) in tabs" @click="selectedTab = tab">{{ tab }}</span>
+			<span :class="{ activeTab: selectedTab !== tab }" v-for="(tab, index) in tabs" @click="selectedTab = tab">{{ tab }}</span>
 			</ul>
 
 			<div v-show="selectedTab === 'Shipping'">
@@ -67,7 +67,7 @@ Vue.component('info', {
 
 			<div v-show="selectedTab === 'Details'">
 				<ul>
-					<li v-for="detail in details" >{{ detail }}</li>
+					<li v-for="detail in details">{{ detail }}</li>
 				</ul>
 			</div>
 		</div>
@@ -143,12 +143,14 @@ Vue.component('product-review', {
 			this.name = null
 			this.review = null
 			this.rating = null
+			this.errors = [];
 			} else {
 				if(!this.name) this.errors.push("Name required.")
 				if(!this.review) this.errors.push("Review required.")
 				if(!this.rating) this.errors.push("Rating required.")
 			}
-		}
+		},
+		
 	}
 })
 
