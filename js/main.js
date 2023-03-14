@@ -17,9 +17,9 @@ Vue.component('product-tabs', {
 			<p v-if="!reviews.length">There are no reviews yet.</p>
 			<ul>
 				<li v-for="review in reviews">
-				<p>{{ review.name }}</p>
-				<p>Rating: {{ review.rating }}</p>
-				<p>{{ review.review }}</p>
+				<p>Name: {{ review.name }}</p>
+				<p>Review: {{ review.review }}</p>
+				<p>Rating: {{ '*'.repeat(review.rating) }}</p>
 				</li>
 			</ul>
 		</div>
@@ -32,10 +32,11 @@ Vue.component('product-tabs', {
 	data() {
 			return {
 					tabs: ['Reviews', 'Make a Review'],
-					selectedTab: 'Reviews'
+					selectedTab: 'Reviews',
 			}
 	}
 })
+
 
 Vue.component('info', {
 	props: {
@@ -104,31 +105,32 @@ Vue.component('product-review', {
 		</select>
 	</p>
 
-	<p>Would you recommend this product?
-		<label for="radioYes" class="form-radio-hidden">
-			<input type="radio" id="radioYes" name="question" value="Yes" v-model="recommendation">
-			<span class="radio"></span>
-			<span class="text">Yes</span>
-		</label>
-		<label for="radioNo" class="form-radio-hidden">
-			<input type="radio" id="radioNo" name="question" value="No" v-model="recommendation">
-			<span class="radio"></span>
-			<span class="text">No</span>
-		</label>
-	</p>
-
 	<p>
 		<input type="submit" value="Submit"> 
 	</p>
 
 	</form>
 	`,
+	
+	// <p>Would you recommend this product?
+	// 	<label for="radioYes" class="form-radio-hidden">
+	// 		<input type="radio" id="radioYes" name="question" value="Yes" v-model="recommendation">
+	// 		<span class="radio"></span>
+	// 		<span class="text">Yes</span>
+	// 	</label>
+	// 	<label for="radioNo" class="form-radio-hidden">
+	// 		<input type="radio" id="radioNo" name="question" value="No" v-model="recommendation">
+	// 		<span class="radio"></span>
+	// 		<span class="text">No</span>
+	// 	</label>
+	// </p>
+
 	data () {
 		return {
 			name: null,
 			review: null,
 			rating: null,
-			recommendation: null,
+			// recommendation: null,
 			errors: []
 		}
 	},
@@ -139,18 +141,18 @@ Vue.component('product-review', {
 				name: this.name,
 				review: this.review,
 				rating: this.rating,
-				recommendation: this.recomendation
+				// recommendation: this.recomendation
 			}
 			eventBus.$emit('review-submitted', productReview)
 			this.name = null
 			this.review = null
 			this.rating = null
-			this.recommendation = null
+			// this.recommendation = null
 			} else {
 				if(!this.name) this.errors.push("Name required.")
 				if(!this.review) this.errors.push("Review required.")
 				if(!this.rating) this.errors.push("Rating required.")
-				if(!this.recommendation) this.errors.push("Recommendation required.")
+				// if(!this.recommendation) this.errors.push("Recommendation required.")
 			}
 		}
 	}
