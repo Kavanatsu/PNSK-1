@@ -19,7 +19,14 @@ Vue.component('product-tabs', {
 				<li v-for="review in reviews">
 				<p>Name: {{ review.name }}</p>
 				<p>Review: {{ review.review }}</p>
-				<p>Rating: {{ '*'.repeat(review.rating) }}</p>
+				<div class="rating-result">
+					<span :class="{ active: review.rating >= 1 }"></span>	
+					<span :class="{ active: review.rating >= 2 }"></span>    
+					<span :class="{ active: review.rating >= 3 }"></span>  
+					<span :class="{ active: review.rating >= 4 }"></span>    
+					<span :class="{ active: review.rating >= 5 }"></span>
+				</div>
+				
 				</li>
 			</ul>
 		</div>
@@ -96,13 +103,18 @@ Vue.component('product-review', {
 
 	<p>
 		<label for="rating">Rating:</label>
-		<select id="rating" v-model.number="rating">
-			<option>5</option>
-			<option>4</option>
-			<option>3</option>
-			<option>2</option>
-			<option>1</option>
-		</select>
+		<div id="rating">
+			<input v-model="rating" type="radio" id="star-5" name="rating" value="5">
+			<label for="star-5" title="Оценка «5»"></label>	
+			<input v-model="rating" type="radio" id="star-4" name="rating" value="4">
+			<label for="star-4" title="Оценка «4»"></label>    
+			<input v-model="rating" type="radio" id="star-3" name="rating" value="3">
+			<label for="star-3" title="Оценка «3»"></label>  
+			<input v-model="rating" type="radio" id="star-2" name="rating" value="2">
+			<label for="star-2" title="Оценка «2»"></label>    
+			<input v-model="rating" type="radio" id="star-1" name="rating" value="1">
+			<label for="star-1" title="Оценка «1»"></label>
+		</div>
 	</p>
 	
 	<p>
@@ -111,26 +123,11 @@ Vue.component('product-review', {
 
 	</form>
 	`,
-
-	// <p>Would you recommend this product?
-	// 	<label for="radioYes" class="form-radio-hidden">
-	// 		<input type="radio" id="radioYes" name="question" value="Yes" v-model="recommendation">
-	// 		<span class="radio"></span>
-	// 		<span class="text">Yes</span>
-	// 	</label>
-	// 	<label for="radioNo" class="form-radio-hidden">
-	// 		<input type="radio" id="radioNo" name="question" value="No" v-model="recommendation">
-	// 		<span class="radio"></span>
-	// 		<span class="text">No</span>
-	// 	</label>
-	// </p>
-
 	data () {
 		return {
 			name: null,
 			review: null,
 			rating: null,
-			// recommendation: null,
 			errors: []
 		}
 	},
@@ -141,18 +138,15 @@ Vue.component('product-review', {
 				name: this.name,
 				review: this.review,
 				rating: this.rating,
-				// recommendation: this.recomendation
 			}
 			eventBus.$emit('review-submitted', productReview)
 			this.name = null
 			this.review = null
 			this.rating = null
-			// this.recommendation = null
 			} else {
 				if(!this.name) this.errors.push("Name required.")
 				if(!this.review) this.errors.push("Review required.")
 				if(!this.rating) this.errors.push("Rating required.")
-				// if(!this.recommendation) this.errors.push("Recommendation required.")
 			}
 		}
 	}
