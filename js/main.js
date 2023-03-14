@@ -104,14 +104,14 @@ Vue.component('product-review', {
 			<option>1</option>
 		</select>
 	</p>
-
+	
 	<p>
 		<input type="submit" value="Submit"> 
 	</p>
 
 	</form>
 	`,
-	
+
 	// <p>Would you recommend this product?
 	// 	<label for="radioYes" class="form-radio-hidden">
 	// 		<input type="radio" id="radioYes" name="question" value="Yes" v-model="recommendation">
@@ -136,7 +136,7 @@ Vue.component('product-review', {
 	},
 	methods: {
 		onSubmit () {
-			if(this.name && this.review && this.rating && this.recommendation) {
+			if(this.name && this.review && this.rating) {
 			let productReview = {
 				name: this.name,
 				review: this.review,
